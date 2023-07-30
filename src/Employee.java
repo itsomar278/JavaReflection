@@ -1,4 +1,4 @@
-public class Employee {
+public class Employee implements Comparable<Employee>{
     int id;
     int age ;
     String Name;
@@ -14,5 +14,18 @@ public class Employee {
 
     public int CalcSalary(int hours, int rate) {
         return( (hours * rate) + age ) ;
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        if(!this.Name.equals(o.Name))
+         {
+             return 0;
+         }
+        else
+        {
+            return 1;
+        }
+
     }
 }

@@ -4,18 +4,22 @@ public class Main {
         // intercepting the class methods and fields using reflection
         printFieldsAndMethods("Employee");
         System.out.println("--------------------------------------------------");
-       Employee obj = (Employee) instantiateObject("Employee");
-        System.out.println(obj.getClass());
-        System.out.println(obj.getClass().getSuperclass());
-        
+        instantiateObject("Employee");
+
     }
 
-    public static Object instantiateObject(String className) {
+    public static void instantiateObject(String className) {
         try {
             Class<?> classsss = Class.forName(className);
             Constructor<?> constructor = classsss.getConstructor(int.class, int.class, String.class);
             Object obj = constructor.newInstance(10, 20, "Ahmed");
-            return obj;
+            System.out.println(obj.getClass());
+            System.out.println(obj.getClass().getSuperclass());
+            System.out.print("implements:  ");
+            Class<?>[] interfaces =  obj.getClass().getInterfaces();
+            for (Class<?> anInterface : interfaces) {
+                System.out.print(anInterface);
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
@@ -23,7 +27,6 @@ public class Main {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        return null;
     }
     public static void printFieldsAndMethods(String className) {
         try {
@@ -52,4 +55,5 @@ public class Main {
             e.printStackTrace();
         }
     }
+
 }
